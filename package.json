@@ -1,0 +1,56 @@
+{
+  "name": "n8n-nodes-azure-devops-server",
+  "version": "1.0.0",
+  "description": "n8n community node for Azure DevOps Server 2020",
+  "license": "GPLv3",
+  "author": {
+    "name": "Andrey Zubkov",
+    "email": "andrey.vinovniy@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guility/n8n-nodes-azure-devops-2020.git"
+  },
+  "main": "dist/nodes/AzureDevOpsServer/AzureDevOpsServer.node.js",
+  "scripts": {
+    "build": "tsc && gulp build",
+    "bundle": "gulp bundle",
+    "dev": "tsc --watch",
+    "format": "prettier nodes credentials --write",
+    "lint": "eslint nodes credentials --ext .ts",
+    "lintfix": "eslint nodes credentials --ext .ts --fix",
+    "prepublishOnly": "npm run build && npm run bundle"
+  },
+  "files": [
+    "dist/nodes/AzureDevOpsServer/",
+    "dist/credentials/AzureDevOpsServerApi.credentials.js",
+    "icons/azuredevops.svg"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/AzureDevOpsServerApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/AzureDevOpsServer/AzureDevOpsServer.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.59.0",
+    "@typescript-eslint/parser": "^5.59.0",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-import": "^2.27.5",
+    "gulp": "^5.0.1",
+    "gulp-zip": "^5.1.0",
+    "n8n-core": "^1.16.0",
+    "n8n-workflow": "^1.16.0",
+    "prettier": "^2.8.7",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "buffer": "^6.0.3"
+  }
+}
