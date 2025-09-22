@@ -22,3 +22,6 @@ Community node for interacting with Azure DevOps Server 2020 REST API
 ```bash
 npm install n8n-nodes-azure-devops-server
 ```
+
+### Keywords:
+n8n-community-node-package
