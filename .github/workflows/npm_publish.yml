@@ -1,0 +1,52 @@
+name: Publish to npm
+
+on:
+  push:
+    branches: [ "main" ]
+  release:
+    types: [created]
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        registry-url: 'https://registry.npmjs.org'
+        cache: 'npm'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Run tests
+      run: npm test --if-present
+
+    - name: Build package
+      run: npm run build
+
+    - name: Verify build
+      run: |
+        ls -la dist/
+        [ -f dist/nodes/AzureDevOpsServer.node.js ] && echo "✅ Main node file exists"
+        [ -f dist/credentials/AzureDevOpsServerApi.credentials.js ] && echo "✅ Credentials file exists"
+        [ -f dist/index.js ] && echo "✅ Index file exists"
+
+    - name: Publish to npm
+      run: npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      if: github.event_name == 'release'
+      with:
+        files: |
+          dist/azure-devops-node.zip
+        generate_release_notes: true
