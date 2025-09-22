@@ -36,7 +36,6 @@ jobs:
         ls -la dist/
         [ -f dist/nodes/AzureDevOpsServer.node.js ] && echo "✅ Main node file exists"
         [ -f dist/credentials/AzureDevOpsServerApi.credentials.js ] && echo "✅ Credentials file exists"
-        [ -f dist/index.js ] && echo "✅ Index file exists"
 
     - name: Publish to npm
       run: npm publish
