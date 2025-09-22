@@ -1,0 +1,16 @@
+# Исходные файлы
+src/
+nodes/
+credentials/
+__tests__/
+.github/
+
+# Конфигурационные файлы
+tsconfig.json
+jest.config.js
+.eslintrc.js
+.prettierrc
+
+# Документация и прочее
+*.md
+!README.md
